@@ -4,7 +4,10 @@
   "description": "Electron chat use webRTC",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "webpack",
+    "build-main": "rm -rf public && babel main.js --out-dir  public/main",
+    "start-dev": "webpack-dev-server  --config webpack.config.dev.js --open"
   },
   "keywords": [
     "Electron",
@@ -18,7 +21,9 @@
   "author": "hg",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.6.0",
@@ -33,14 +38,17 @@
     "mini-css-extract-plugin": "^0.7.0",
     "postcss-loader": "^3.0.0",
     "style-loader": "^0.23.1",
+    "url-loader": "^2.0.1",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "antd": "^3.19.8",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.1"
   },
   "build": {
     "productName": "electron-chat",

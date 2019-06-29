@@ -1,4 +1,5 @@
 "use strict";
+const webpack = require("webpack");
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,12 +10,9 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: '[name]_[chunkhash:4].js'
+        filename: '[name]_[hash:4].js'
     },
-    mode: 'production',
-    resolve: {
-        extensions: ['.js', '.jsx', '.json'],
-    },
+    mode: 'development',
     module: {
         rules: [
             {
@@ -68,6 +66,9 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        extensions: ['.js', '.jsx', '.json'],
+    },
     devServer: {
         contentBase: "./dist",
         hot: true,
@@ -75,8 +76,9 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '[name]_[contenthash:4].css'
+            filename: '[name]_[hash:4].css'
         }),
+        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "render/template/index.html"),
             filename: "index.html",
